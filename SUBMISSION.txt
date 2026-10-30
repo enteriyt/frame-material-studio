@@ -1,0 +1,10 @@
+项目：Frame 素材制作工作室
+
+源码压缩包包含 Next.js / React / TypeScript 前端、Java / Spring Boot / MyBatis 后端、MySQL 建表与种子、模拟图片、Docker Compose、CI、测试及 README。
+
+在源码根目录运行：docker compose up --build
+访问：http://localhost:3000
+
+本机已通过前端 lint、类型检查、5 项测试、生产构建，以及 Java 7 项测试与打包。使用 H2 MySQL 兼容模式完成真实 HTTP 联调与浏览器上传、制作、历史刷新和用户隔离检查。真实 MySQL / Docker 运行尚未在本机验证，CI 已配置 Compose 验收。
+
+项目设计、工具使用流程、实际投入、已知限制与详细验证记录见 README.md 和 VALIDATION.md。
