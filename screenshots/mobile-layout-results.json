@@ -1,0 +1,56 @@
+[
+  {
+    "frameWidth": 320,
+    "page": "/",
+    "contentWidth": 305,
+    "scrollWidth": 305
+  },
+  {
+    "frameWidth": 320,
+    "page": "/templates/collage",
+    "contentWidth": 305,
+    "scrollWidth": 305
+  },
+  {
+    "frameWidth": 320,
+    "page": "/history",
+    "contentWidth": 305,
+    "scrollWidth": 305
+  },
+  {
+    "frameWidth": 375,
+    "page": "/",
+    "contentWidth": 360,
+    "scrollWidth": 360
+  },
+  {
+    "frameWidth": 375,
+    "page": "/templates/collage",
+    "contentWidth": 360,
+    "scrollWidth": 360
+  },
+  {
+    "frameWidth": 375,
+    "page": "/history",
+    "contentWidth": 360,
+    "scrollWidth": 360
+  },
+  {
+    "frameWidth": 390,
+    "page": "/",
+    "contentWidth": 375,
+    "scrollWidth": 375
+  },
+  {
+    "frameWidth": 390,
+    "page": "/templates/collage",
+    "contentWidth": 375,
+    "scrollWidth": 375
+  },
+  {
+    "frameWidth": 390,
+    "page": "/history",
+    "contentWidth": 375,
+    "scrollWidth": 375
+  }
+]

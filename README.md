@@ -168,13 +168,13 @@ mvn -B verify
 java -jar target/studio-1.0.0.jar
 ```
 
-CI 在 push 和 pull_request 时运行前端 lint、类型检查、测试、生产构建，以及 Java 测试与打包。另一个 CI 作业执行 Compose 构建、等待服务健康，再通过 `python3 tools/smoke.py` 验证真实 MySQL 的完整链路。Java API 集成测试使用 H2 MySQL 模式便于隔离执行；正式运行使用 MySQL 驱动与 MySQL 数据库。H2 不能替代 MySQL 容器兼容性验证，具体本次执行结果见 `VALIDATION.md`。
+CI 在 push 和 pull_request 时运行前端 lint、类型检查、测试、生产构建，以及 Java 测试与打包。另一个 CI 作业执行 Compose 构建、等待服务健康，再通过 `python3 tools/smoke.py` 验证真实 MySQL 的完整链路。Java API 集成测试使用 H2 MySQL 模式；容器验收使用真正的 MySQL 8.4。三组托管 CI 均已通过，运行链接、验收提交与小屏实测结果见 `VALIDATION.md`。
 
 前端测试覆盖：两个任务状态独立、全部终态停止轮询、请求错误保持任务状态并可恢复、旧用户迟到响应失效、较新的查询优先、连续受理多个任务不覆盖。后端测试覆盖：三个步骤顺序、每一阶段失败中断、终态不重复执行、素材缺失、真实图片上传、跨用户隔离、数量与格式校验、任务在无查询情况下独立完成、结果文件可读取。
 
 ## 完成情况与取舍
 
-已提供前后端、MySQL 配置、模板接口、上传校验、持久化异步步骤、可控模拟、独立任务状态、请求异常恢复、刷新恢复、演示身份、响应式页面、关键测试、CI 及 Compose。已执行的检查与尚未运行的环境检查分别记录在 `VALIDATION.md`；容器配置、真实 MySQL 链路及小屏操作仍需按该文件完成验收。
+已提供前后端、MySQL 配置、模板接口、上传校验、持久化异步步骤、可控模拟、独立任务状态、请求异常恢复、刷新恢复、演示身份、响应式页面、关键测试、CI 及 Compose。已通过本地测试、托管 CI、真实 Docker/MySQL 链路与浏览器小屏操作验收，具体记录见 `VALIDATION.md`。
 
 已知边界集中如下：
 

@@ -1,6 +1,6 @@
 # 验证记录
 
-日期：2026-10-29（Asia/Shanghai）。首轮实现、检查与整理约 50 分钟（约 11:25～12:15，含工具下载与依赖安装）。后续修改与复核的投入另行记录。
+首轮日期：2026-10-29；补验日期：2026-10-30（Asia/Shanghai）。首轮实现、检查与整理约 50 分钟（约 11:25～12:15，含工具下载与依赖安装）。补验包含小屏操作、GitHub 托管 CI、真实 Docker/MySQL 联调和本机容器环境安装。
 
 ## 已执行
 
@@ -18,11 +18,31 @@
 | 浏览器操作 | 通过 | 首页、详情、真实 PNG 上传、受理、成功结果、历史刷新恢复、新用户空历史与切回原用户 |
 | 桌面视觉检查 | 通过 | 首页与历史页面截图见 `screenshots/` |
 
-## 尚未执行
+## 2026-10-30 补验结果
 
-- 本机没有 Docker Engine 和 MySQL 服务，因此未运行 `docker compose up --build` 和真实 MySQL 8.4 集成验收。
-- Linux standalone 镜像构建及 GitHub 托管 CI 尚未执行。CI 包含真实 Compose 构建与 `tools/smoke.py`，可在上传仓库后自动验证。
-- 小屏样式已实现媒体查询，未进行完整移动端浏览器操作验收。
+私有源码仓库：<https://github.com/enteriyt/frame-material-studio>。
+
+首轮托管验收提交：`d83fde8f0923d951648c3eba0e7d090045da8ea5`。
+
+真实运行链接：[GitHub Actions / Verify #1](https://github.com/enteriyt/frame-material-studio/actions/runs/40993619768)。三项作业均为 `success`：
+
+| 作业 | 真实执行内容 | 结果 |
+| --- | --- | --- |
+| frontend | Ubuntu runner 安装锁定依赖，执行 lint、类型检查、5 项测试和生产构建 | 通过 |
+| backend | Ubuntu runner 使用 JDK 21 执行 Maven verify、7 项测试与打包 | 通过 |
+| compose-smoke | 构建前后端 Linux 镜像，启动 MySQL 8.4、Java、Next.js，等待健康检查，通过 HTTP 执行 `tools/smoke.py` | 通过 |
+
+容器验收覆盖：MySQL 实际建表与模板种子、真实 PNG 上传、成功任务、三个指定阶段失败、结果文件字节一致、用户记录隔离。前端 Linux standalone 镜像也已实际构建和启动。本地 H2 测试与真实 MySQL 容器验收分别执行，结果均通过。
+
+小屏使用 `tools/mobile-harness.html` 中的真实 iframe 页面，分别设置 320、375、390 像素框架宽度，检查列表、三图详情、历史页共 9 组布局，均无横向溢出。桌面滚动条占 15 像素，因此对应内容宽度为 305、360、375；每组的 `scrollWidth` 都等于 `clientWidth`，原始结果见 `screenshots/mobile-layout-results.json`。
+
+375 像素下已通过键盘实际操作分类筛选、进入三图模板、逐张选择本地 PNG、移除图片后禁止提交、重新上传后恢复提交、调整模拟耗时、提交任务、后台成功以及历史结果查看。截图见 `mobile-375-filter.png`、`mobile-375-submitted.png`、`mobile-375-history.png`。这是浏览器小屏与键盘验收，未进行真实手机设备触控验收。
+
+可复现小屏环境：先启动项目，再在源码根目录执行 `python -m http.server 8091 --bind 127.0.0.1 --directory tools`，打开 `http://localhost:8091/mobile-harness.html`。工具支持选择页面与宽度，以及重新载入当前页面。
+
+## 本机容器环境状态
+
+本机已安装 Docker Desktop 4.97.0、Docker CLI 29.9.2、Compose 5.6.1、WSL 2.7.14。WSL 离线安装包的微软签名为 Valid，SHA-256 与微软发布元数据一致。Windows 的 VirtualMachinePlatform 与 WSL 组件已启用，系统返回 3010，需重启生效；没有自动重启。本机 `docker compose config --quiet` 已通过。本机引擎运行仍待重启验收；项目的真实容器与 MySQL 流程已经在 GitHub 托管 Linux 环境验证通过。
 
 ## 验证中的修正
 

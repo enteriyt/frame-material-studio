@@ -5,6 +5,10 @@
 在源码根目录运行：docker compose up --build
 访问：http://localhost:3000
 
-本机已通过前端 lint、类型检查、5 项测试、生产构建，以及 Java 7 项测试与打包。使用 H2 MySQL 兼容模式完成真实 HTTP 联调与浏览器上传、制作、历史刷新和用户隔离检查。真实 MySQL / Docker 运行尚未在本机验证，CI 已配置 Compose 验收。
+已通过前端 lint、类型检查、5 项测试、生产构建，以及 Java 7 项测试与打包。GitHub Actions 中三项作业全部通过，包括真实 Docker / MySQL 8.4 三服务启动与 HTTP 验收。浏览器中已验证上传、制作、历史刷新、用户隔离和小屏操作。
+
+私有仓库：https://github.com/enteriyt/frame-material-studio
+托管验收：https://github.com/enteriyt/frame-material-studio/actions/runs/40993619768
+验收提交：d83fde8f0923d951648c3eba0e7d090045da8ea5
 
 项目设计、工具使用流程、实际投入、已知限制与详细验证记录见 README.md 和 VALIDATION.md。

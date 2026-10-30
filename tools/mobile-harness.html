@@ -9,12 +9,21 @@
 </style>
 <div class="toolbar">
   <label>验收宽度 <select id="size"><option value="390">390</option><option value="375">375</option><option value="320">320</option><option value="768">768</option></select></label>
+  <label>页面 <select id="page"><option value="/">模板列表</option><option value="/templates/portrait">单图模板</option><option value="/templates/collage">三图模板</option><option value="/history">历史结果</option></select></label>
+  <button id="reload" type="button">重新载入当前页面</button>
   <span>真实页面 iframe · 页面内媒体查询按框架宽度生效</span>
 </div>
 <iframe title="Frame 小屏验收" src="http://localhost:3000/"></iframe>
 <script>
   document.querySelector('#size').addEventListener('change', event => {
     document.querySelector('iframe').style.width = event.target.value + 'px';
+  });
+  document.querySelector('#page').addEventListener('change', event => {
+    document.querySelector('iframe').src = 'http://localhost:3000' + event.target.value;
+  });
+  document.querySelector('#reload').addEventListener('click', () => {
+    const frame = document.querySelector('iframe');
+    frame.src = frame.src;
   });
 </script>
 </html>
